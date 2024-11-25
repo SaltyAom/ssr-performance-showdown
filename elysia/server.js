@@ -2,7 +2,7 @@ import { fileURLToPath } from "node:url";
 import { Elysia } from "elysia";
 import { availableParallelism } from "os";
 
-const NUM_WORKERS = availableParallelism();
+const NUM_WORKERS = availableParallelism() / 2;
 const workers = [];
 
 // Create a pool of workers
@@ -16,10 +16,10 @@ let currentWorker = 0;
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
 	new Elysia()
 		.get("/", (c) => {
-			c.set.headers['content-type'] = 'text/html; charset=utf-8'
+			c.set.headers["content-type"] = "text/html; charset=utf-8";
 
 			const task = Promise.withResolvers();
-			const worker = workers[(currentWorker + 1) % NUM_WORKERS];
+			const worker = workers[currentWorker++ % NUM_WORKERS];
 
 			worker.addEventListener(
 				"message",
