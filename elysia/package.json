@@ -1,0 +1,15 @@
+{
+  "type": "module",
+  "scripts": {
+    "dev": "npm run start",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "elysia": "^1.1.25",
+    "fastify": "^4.28.1",
+    "fastify-html": "^0.5.0"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.1.9"
+  }
+}
